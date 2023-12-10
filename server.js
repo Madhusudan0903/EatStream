@@ -1,14 +1,49 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const ejs = require('ejs')
 const path = require('path')
 const expressLayout = require('express-ejs-layouts')
 const PORT = process.env. PORT || 3000
+const mongoose = require('mongoose')
+const session = require('express-session')
+const flash = require('express-flash')
+const MongoDbStore = require('connect-mongo');
 
+// Database connection
+const url = 'mongodb://127.0.0.1:27017/pizza';
+mongoose. connect (url , {
+  useNewUrlParser : true, useUnifiedTopology : true
+},).then(() => console. log( 'Connected Successfully' ) )
+  . catch( (err) => { console.error(err); });
+
+  
+
+// Session config
+app.use(session({
+  secret: process.env.COOKIE_SECRET,
+  resave: false,
+  store: MongoDbStore.create({
+    mongoUrl: 'mongodb://127.0.0.1:27017/pizza',
+    collection:'sessions'
+  }),
+  saveUninitialized: false,
+  cookie: { maxAge: 1000 * 60 * 60 * 24 }// cookie session valid for 24 hours
+}))
+
+
+app.use(flash())
 // Assets
 app.use(express.static('public'))
+app.use(express.json())
 
 
+// Global middleware
+app.use((req, res, next) => {
+  res.locals.session = req.session
+  //res.locals.user = req.user
+  next()
+})
 
 
 // set Template engine
@@ -18,21 +53,12 @@ app.set('view engine', 'ejs')
 
 
 //ye routes ko hmesha Template engine ke baad rkhna hai
-app.get('/', (req, res) => {
-    res.render('home')
-})
+require('./routes/web')(app) //ye ek function call krdia yahan
+// app.get('/', (req, res) => {
+//     res.render('home')
+// })
 
-app.get('/cart', (req, res) => {
-    res.render('customers/cart')
-})
 
-app.get('/login', (req, res) => {
-    res.render('auth/login')
-})
-
-app.get('/register', (req, res) => {
-    res.render('auth/register')
-})
 
 app.listen (PORT,  ()  =>  {
     console.log(`Listening on port ${PORT}`)
