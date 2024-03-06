@@ -13,7 +13,7 @@ const admin = require('../app/http/middlewares/admin')
 
 //ye controllers vale me sara logic likha va hai
 function initRoutes(app) {
-    app.get('/', homeController().index)
+    app.get('/', homeController().index) //.index krke call krlia i.e object ke upar method call krlia
 
     // (req, res) =>{         //These lines are replaced by homeController().index
     //     res.render('home')
@@ -24,11 +24,13 @@ function initRoutes(app) {
     app.get('/login', guest, authController().login)
     app.post('/login', authController().postLogin)
     
-    app.get('/register', guest, authController().register)
-    app.post('/register', authController().postRegister)
+    app.get('/register', guest, authController().register) //register page dikhane ke liye
+    app.post('/register', authController().postRegister) //aur ye usme data update krne k liye
     app.post('/logout', authController().logout)
 
     app.get('/cart', cartController().cart)
+
+    //ye to cart me koi item add krre hai uske liye hai
     app.post('/update-cart' ,cartController().update)
 
     

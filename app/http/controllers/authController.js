@@ -1,3 +1,5 @@
+//login, register vala sara logic iss controller me
+
 const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
@@ -17,7 +19,7 @@ function authController() {
                 req.flash('error', 'All fields are required')
                 return res.redirect('/login')
             }
-            passport.authenticate('local', (err, user, info) => {
+            passport.authenticate('local', (err, user, info) => { //ye info me messages receive hore hai jaise ki logged in successfully
                 if(err) {
                     req.flash('error', info.message )
                     return next(err)
@@ -34,17 +36,17 @@ function authController() {
 
                     return res.redirect(_getRedirectUrl(req))
                 })
-            })(req, res, next)
+            })(req, res, next) //passport.authenticate return krta h ek function jo hmne yahan call kia h
         },
         register(req, res) {
             res.render('auth/register')
         },
         async postRegister(req, res) {
-            const {name, email, password} = req.body
+            const {name, email, password} = req.body 
             // Validate request 
             if(!name || !email || !password) {
-                req.flash('error', 'All fields are required')
-                req.flash('name', name)
+                req.flash('error', 'All fields are required') //ye message display hoga register.ejs m
+                req.flash('name', name) //ye isliye likha taki refresh krne pe data erase na ho aur ye register.ejs me value attribute me dikenge
                 req.flash('email', email)
             return res.redirect('/register')
         }
@@ -55,7 +57,7 @@ function authController() {
                 return res.redirect("/register")
             }
             // Hash password 
-            const hashedPassword = await bcrypt.hash(password, 10)
+            const hashedPassword = await bcrypt.hash(password, 10) //hashed me store krna h password using bcrypt
             // Create a user 
             const user = new User({
              name,

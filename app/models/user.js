@@ -5,7 +5,7 @@ const userSchema = new Schema({
     email: { type:String, required: true, unique:true },
     password: { type:String, required: true } ,
     size: { type:String, default:'customer' }
-},{timestamps: true})
+},{timestamps: true}) //isse time aajayega
 
 
 module.exports = mongoose.model('User', userSchema)

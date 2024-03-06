@@ -11,7 +11,7 @@ function init(passport) {
             return done(null, false, { message: 'No user with this email' })
         }
 
-        bcrypt.compare(password, user.password).then(match => {
+        bcrypt.compare(password, user.password).then(match => { //apna entered password match krenge database ke password se   
             if(match) {
                 return done(null, user, { message: 'Logged in succesfully' })
             }

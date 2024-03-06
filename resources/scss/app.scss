@@ -8,6 +8,7 @@ body{
     color: $dark;
 }
 
+//NAVBAR 
 nav li:last-child a {
     background: $primary;
     &:hover {
@@ -15,12 +16,14 @@ nav li:last-child a {
     }
 }    
 nav li a{
-    transition: $smooth; 
+    transition: $smooth; //anchor tag pe hover ka transition time
     &:hover {
     color: $primary;
     }
 }    
 
+
+//HOME PAGE
 section.hero{
     background: $secondary;
 }
@@ -43,7 +46,7 @@ section.hero{
     }
 }
 
-.btn-primary{
+.btn-primary{ //har ek button ke liye
     background: $primary;
     transition: $smooth;
     &:hover {
@@ -51,6 +54,8 @@ section.hero{
     }
 }
 
+
+//CART PAGE
 section.cart{
     background: $secondary;
     .amount{
@@ -58,6 +63,8 @@ section.cart{
     }
 }
 
+
+//LOGIN PAGE
 section.login{
     background: $secondary;
     min-height: calc(100vh - 86px);
@@ -69,6 +76,9 @@ section.login{
     }
 }
 
+
+
+//item added to cart vale ke liye
 .noty_theme__mint {
     border-radius: 50px!important;
     padding-left: 8px!important;
@@ -78,6 +88,8 @@ a.link{
     color: $primary;
 }
 
+
+//single status vale page ki
 section.status{
     background: $secondary;
     min-height: calc(100vh - 86px);
@@ -185,4 +197,22 @@ section.status{
     float: right;
     font-size: 14px;
     margin-top: 8px;
+}
+
+//For making our app responsive - mtlab minimize krke chota kre tb bhi sahi dikhe, aur jab 1060 se chota kr tb ye sari chize apply hogi
+@media(max-width:1060px) {
+    .container {
+        max-width: 90%;
+    }
+    table {
+       display: block;
+       overflow-x: auto; //jarurat h to scroll ayega vrna nhi
+       white-space: nowrap;
+    }
+}
+
+@media(max-width: 768px) {
+    .status-box ul li span:before { //mtlab 768 se choti size hone pe icons ki size 34px krdo
+        font-size: 34px;
+    }
 }

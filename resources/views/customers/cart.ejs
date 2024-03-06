@@ -1,16 +1,16 @@
 <section class="cart py-16">
-    <% if(session.cart) { %>
+    <% if(session.cart) { %> <!--jab cart me kuch ho-->
 
-    <div class="order container mx-auto w-1/2">
+    <div class="order container mx-auto xl:w-1/2">
         <div class="flex items-center border-b border-gray-300 pb-4">
             <img src="/img/cart-black.png" alt="">
             <h1 class="font-bold ml-4 text-2x1">Order summary</h1>
         </div>
     
         <div class="pizza-list">
-            <% for(let pizza of Object.values(session.cart.items)) { %>
+            <% for(let pizza of Object.values(session.cart.items)) { %> <!--items jo property h vo object h array nhi,  so Object.values se usko array me convert krlia-->
             <div class="flex items-center my-8">
-                <img class="w-24"  src="/img/<%= pizza.item.image %>" alt="">
+                <img class="w-24"  src="/img/<%= pizza.item.image %>" alt=""> <!--pizza will denote this  items: {pizzaId: { item: pizzaObject, qty:0 }, and ye jo item h pizzaObject isme sab image vagarah h -->
 
                 <div class="flex-1 ml-4">
                     <h1><%= pizza.item.name %></h1>
@@ -49,7 +49,7 @@
         </div>
 
     </div>
-    <% } else { %>
+    <% } else { %> <!--jab cart empty ho-->
 
     <div class="empty-cart py-16">    
         <div class="container mx-auto text-center">

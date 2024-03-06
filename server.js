@@ -1,14 +1,14 @@
-require('dotenv').config()
-const express = require('express')
-const app = express()
+require('dotenv').config() //secret keys ko .env se laane ke liye
+const express = require('express') //ye ek function import hojata hai
+const app = express() //ye object bnalia uss function ka
 const ejs = require('ejs')
 const path = require('path')
 const expressLayout = require('express-ejs-layouts')
-const PORT = process.env. PORT || 3000
+const PORT = process.env. PORT || 3000 //environment variable me check krega ki koi port pda hai kya,  nhi to 3000 
 const mongoose = require('mongoose')
 const session = require('express-session')
 const flash = require('express-flash')
-const MongoDbStore = require('connect-mongo');
+const MongoDbStore = require('connect-mongo'); //session ko store krne ke liye, connect-mongo ek package install kia tha
 const passport = require('passport')
 const Emitter = require('events')
 
@@ -26,16 +26,16 @@ app.set('eventEmitter', eventEmitter)
 
 
 // Session config
-app.use(session({
-  secret: process.env.COOKIE_SECRET,
-  resave: false,
-  store: MongoDbStore.create({
-    mongoUrl: 'mongodb://127.0.0.1:27017/pizza',
-    collection:'sessions'
-  }),
-  saveUninitialized: false,
-  cookie: { maxAge: 1000 * 60 * 60 * 24 }// cookie session valid for 24 hours
-}))
+  app.use(session({
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    store: MongoDbStore.create({
+      mongoUrl: 'mongodb://127.0.0.1:27017/pizza', //session ko iss database me store krna hai
+      collection:'sessions'
+    }),
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }// cookie session valid for 24 hours
+  }))
 
 
 // Passport config
@@ -49,7 +49,7 @@ app.use(flash())
 // Assets
 app.use(express.static('public'))
 app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: false})) //jab form submit kroge register vala tb urlencoded data receive hoega
 
 
 // Global middleware
