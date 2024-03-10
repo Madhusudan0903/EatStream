@@ -10,3 +10,5 @@ Node.js | Express.js | MongoDB | Socket.io | Tailwind CSS
 
 __DEMO VIDEO:__
 
+https://github.com/Madhusudan0903/EatStream/assets/143173289/0a78ba64-7c8e-4100-9ca4-7e85044561ef
+
